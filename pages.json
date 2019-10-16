@@ -1,9 +1,69 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/home/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/register/index",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/order/index",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
+			"path": "pages/orderDetail/index",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/shop/list/index",
+			"style": {
+				"navigationBarTitleText": "店铺列表"
+			}
+		},
+		{
+			"path": "pages/shop/edit/index",
+			"style": {
+				"navigationBarTitleText": "店铺编辑"
+			}
+		},
+		{
+			"path": "pages/category/list/index",
+			"style": {
+				"navigationBarTitleText": "分类列表"
+			}
+		},
+		{
+			"path": "pages/category/edit/index",
+			"style": {
+				"navigationBarTitleText": "分类编辑"
+			}
+		},
+		{
+			"path": "pages/food/list/index",
+			"style": {
+				"navigationBarTitleText": "菜品列表"
+			}
+		},
+		{
+			"path": "pages/food/edit/index",
+			"style": {
+				"navigationBarTitleText": "菜品列表"
 			}
 		}
 	],
