@@ -154,7 +154,7 @@ import host from '@/config/host'
 						}
 						console.log(this.foodID)
 						uni.uploadFile({
-							url: `${host}/api/img/food/uploadImg`,
+							url: `${host}/manage/api/img/food/uploadImg`,
 							filePath: file.path,
 							name: 'image',
 							formData: {

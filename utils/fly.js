@@ -28,8 +28,8 @@ fly.config.baseURL = `${host}/manage`;
 
 fly.interceptors.request.use(async (request)=>{
     const manageToken = uni.getStorageSync('manageToken') || Cookies.get('manageToken')
+    console.log(manageToken)
     Cookies.set('manageToken', `${manageToken}`)
-    request.params.channel = vuex.state.channel
     return request;
 })
 fly.interceptors.response.use(
@@ -72,9 +72,6 @@ const flyRequest = (url, params, options, method) => {
                             if (res.confirm) {
                                 router.push({
                                     name: 'login',
-                                    query: {
-                                        manage: 'true'
-                                    }
                                 })
                             }
                         }

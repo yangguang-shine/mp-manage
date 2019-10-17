@@ -48,9 +48,10 @@ import host from '@/config/host'
 				}
 				try {
 					this.$showLoading()
-					const res = await this.$fetch.post('/manage/user/login', { phone: this.phone, password: this.password })
+					const res = await this.$fetch.post('/api/login', { phone: this.phone, password: this.password })
 					this.$hideLoading()
 					uni.setStorageSync('manageToken', res.data.manageToken || '')
+					console.log(res.data.manageToken)
 					await this.$showModal({
 						content: '登录成功'
 					})

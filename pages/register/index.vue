@@ -70,7 +70,7 @@ import host from '@/config/host'
 				}
 				try {
 					this.$showLoading()
-					const res = await this.$fetch.post('/manage/user/register', { phone: this.phone, password: this.password, nickname: 		    	this.nickname })
+					const res = await this.$fetch.post('/api/register', { phone: this.phone, password: this.password, nickname: 		    	this.nickname })
 					uni.setStorageSync('manageToken', res.data.manageToken || '')
 					this.$hideLoading()
 					await this.$showModal({

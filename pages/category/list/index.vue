@@ -20,7 +20,7 @@ export default {
         }
     },
     onLoad(options) {
-        this.shopID = options.shopID
+        this.shopID = options.shopID || ''
     },
     async onShow() {
         this.init()

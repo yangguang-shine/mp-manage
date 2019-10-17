@@ -31,12 +31,6 @@
 			}
 		},
 		{
-			"path": "pages/shop/list/index",
-			"style": {
-				"navigationBarTitleText": "店铺列表"
-			}
-		},
-		{
 			"path": "pages/shop/edit/index",
 			"style": {
 				"navigationBarTitleText": "店铺编辑"
@@ -72,5 +66,28 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+		// #ifdef H5
+		,"navigationStyle": "custom"
+		// #endif
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/home/index",
+				"text": "首页",
+				"selectedIconPath": "/static/img/home-active.png",
+				"iconPath": "/static/img/home.png"
+			},
+			{
+				"pagePath": "pages/order/index",
+				"text": "订单",
+				"selectedIconPath": "static/img/order-active.png",
+				"iconPath": "static/img/order.png"
+			}
+		]
 	}
 }

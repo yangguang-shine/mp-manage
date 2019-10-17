@@ -1,0 +1,25 @@
+{
+  "name": "mp-manage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "flyio": "^0.6.14",
+    "js-cookie": "^2.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangguang-shine/mp-manage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yangguang-shine/mp-manage/issues"
+  },
+  "homepage": "https://github.com/yangguang-shine/mp-manage#readme"
+}

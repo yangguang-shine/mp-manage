@@ -1,6 +1,12 @@
 <script>
 	export default {
 		onLaunch: function() {
+			const manageToken = uni.getStorageSync('manageToken')
+			if (!manageToken) {
+				this.$myrouter.push({
+					name: 'login',
+				})
+			}
 			console.log('App Launch')
 		},
 		onShow: function() {

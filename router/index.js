@@ -1,33 +1,29 @@
 const shopList = [
 	{
-		name: 'shop/list',
-		path: '/pages/manage/shop/list/index'
-	},
-	{
 		name: 'shop/edit',
-		path: '/pages/manage/shop/edit/index'
+		path: '/pages/shop/edit/index'
 	},
 ]
 
 const categoryList = [
 	{
 		name: 'category/list',
-		path: '/pages/manage/category/list/index'
+		path: '/pages/category/list/index'
 	},
 	{
 		name: 'category/edit',
-		path: '/pages/manage/category/edit/index'
+		path: '/pages/category/edit/index'
 	},
 ]
 
 const foodList = [
 	{
 		name: 'food/list',
-		path: '/pages/manage/food/list/index'
+		path: '/pages/food/list/index'
 	},
 	{
 		name: 'food/edit',
-		path: '/pages/manage/food/edit/index'
+		path: '/pages/food/edit/index'
 	},
 ]
 
@@ -50,7 +46,7 @@ const routerList = [
 	},
 	{
 		name: 'orderDetail',
-		path: '/pages/order/orderDetail/index'
+		path: '/pages/orderDetail/index'
 	},
 	...shopList,
 	...categoryList,

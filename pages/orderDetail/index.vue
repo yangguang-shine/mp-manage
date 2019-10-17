@@ -139,7 +139,7 @@ import host from '@/config/host'
 		},
 		methods: {
 			async init() {
-				const res = await this.$fetch.get('/api/order/orderDetail', { orderKey: this.orderKey, shopID: this.shopID })
+				const res = await this.$fetch.get('/api/manageOrder/orderDetail', { orderKey: this.orderKey, shopID: this.shopID })
 				console.log(res)
 				const orderDetail = res.data || {};
 				(orderDetail.foodList || []).forEach((foodItem) => {

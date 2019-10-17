@@ -105,7 +105,7 @@ export default {
         try {
             this.$showLoading()
             if (this.shopID) {
-                const res = await this.$fetch.get('/api/shop/find', { shopID: this.shopID })
+                const res = await this.$fetch.get('/api/manageShop/find', { shopID: this.shopID })
                 this.shopInfo = res.data || {}
                 const minusSplit = this.shopInfo.minus.split(',')
                 if (minusSplit[0] === '')
@@ -208,7 +208,7 @@ export default {
                 this.$showLoading({
                     title: '修改中'
                 })
-                await this.$fetch.post('/api/shop/edit', { ...this.shopInfo, shopID: this.shopID })
+                await this.$fetch.post('/api/manageShop/edit', { ...this.shopInfo, shopID: this.shopID })
                 this.$hideLoading()
                 await this.$showModal({
                     content: '修改成功'
@@ -228,7 +228,7 @@ export default {
                 this.$showLoading({
                     title: '添加中'
                 })
-                await this.$fetch.post('/api/shop/add', { ...this.shopInfo })
+                await this.$fetch.post('/api/manageShop/add', { ...this.shopInfo })
                 this.addState = true
                 this.$hideLoading()
                 await this.$showModal({
@@ -282,7 +282,7 @@ export default {
                         imgUrl = this.shopInfo.imgUrl.replace(reg, '$1')
                     }
                     uni.uploadFile({
-                        url: `${host}/api/img/shop/uploadImg`,
+                        url: `${host}/manage/api/img/shop/uploadImg`,
                         filePath: file.path,
                         name: 'image',
                         formData: {

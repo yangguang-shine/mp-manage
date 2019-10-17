@@ -25,40 +25,85 @@
 				</div>
 			</div>
 		</view>
+		<div v-if="showSelectShopBox" class="select-shop-mask flex-row flex-ja-center">
+			<div class="select-shop-box">
+				<div class="select-title">请选择查看订单的店铺</div>
+				<shop v-for="(shopItem, index) in shopList" :key="index" :shopItem="shopItem" @clickShopItem="toSelectOrderShop"></shop>
+			</div>
+		</div>
+		<div class="select-other-shop" @click="toShowSelectShopBox">
+			其他
+		</div>
 	</div>
 </template>
 
 <script>
+import getShopMinusList from '@/utils/getShopMinusList';
 import { mapState, mapMutations } from 'vuex'
 import host from '@/config/host'
+import shop from '@/components/shop'
 
 	export default {
 		data() {
 			return {
 				tabIndex: 0,
 				allOrderList: [[], [], [], []],
-				host
+				host,
+				shopList: [],
+				showSelectShopBox: false
 			}
+		},
+		components: {
+			shop
 		},
 		onShow() {
 			this.getOrderList()
 		},
 		computed: {
 			...mapState({
-				orderListUpdate: state => state.orderListUpdate
+				orderListUpdate: state => state.orderListUpdate,
+				selectOrderShop: state => state.selectOrderShop
 			})
 		},
 		methods: {
 			...mapMutations({
-				changeOrderListUpdate: 'changeOrderListUpdate'
+				changeOrderListUpdate: 'changeOrderListUpdate',
+				saveSelectOrderShop: 'saveSelectOrderShop',
 			}),
 			async getOrderList() {
 				try {
+					this.$showLoading()
+					if (!this.selectOrderShop.shopID) {
+						try {
+							const res = await this.$fetch.get('/api/manageShop/list')
+							const shopList = res.data || [];
+							shopList.forEach((item) => {
+								item.minusList = getShopMinusList(item.minus || '')
+							})
+							this.shopList = shopList
+							if (!this.shopList.length) {
+								await this.$showModal({
+									content: '该管理员无可用店铺，请添加'
+								})
+								this.$myrouter.switchTab({
+									name: 'home'
+								})
+							}
+							this.$hideLoading()
+						} catch (e) {
+							console.log(e)
+							this.$hideLoading()
+						}
+						this.showSelectShopBox = true;
+						return
+					}
 					// if (!this.orderListUpdate[this.tabIndex]) return;
 					this.$set(this.allOrderList, this.tabIndex, [])
-					const res = await this.$fetch.get('/api/order/orderList', {
-						status: this.tabIndex
+					const res = await this.$fetch.get('/api/manageOrder/orderList', {
+						status: this.tabIndex,
+						shopID: this.selectOrderShop.shopID
 					})
+					this.$hideLoading()
 					const orderList = (res.data || []).map((orderItem) => ({
 						...orderItem,
 						orderTypeTitle: this.getOrderTypeTitle(orderItem.orderStatus, orderItem.businessType)
@@ -68,6 +113,7 @@ import host from '@/config/host'
 					this.allOrderList[this.tabIndex].push(...orderList)
 				} catch (e) {
 					console.log(e)
+					this.$hideLoading()
 				}
 			},
 			getOrderTypeTitle(orderStatus, businessType) {
@@ -108,6 +154,15 @@ import host from '@/config/host'
 					}
 				})
 			},
+			toSelectOrderShop(shopItem) {
+				this.saveSelectOrderShop(shopItem)
+				this.showSelectShopBox = false
+				this.allOrderList = [[], [], [], []]
+				this.getOrderList()
+			},
+			toShowSelectShopBox() {
+				this.showSelectShopBox = true
+			}
 		}
 	}
 </script>
@@ -129,7 +184,7 @@ page {
 		height: 100rpx;
 		width: 100%;
 		background-color: #fff;
-		z-index: 99
+		z-index: 3
 	}
 	.tab-item {
 		transition: all 300ms ease-in-out;
@@ -214,6 +269,43 @@ page {
 	.moneu-unit {
 		font-size: 26rpx;
 		font-weight: bold;
+	}
+	.select-shop-mask {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, .5);
+		z-index: 10;
+	}
+	.select-shop-box {
+		width: 690rpx;
+		max-height: 80%;
+		box-sizing: border-box;
+		padding: 30rpx;
+		background-color: #fff;
+		border-radius: 25rpx;
+	}
+	.select-title {
+		font-size: 32rpx;
+		font-weight: bold;
+		padding-bottom: 50rpx;
+		text-align: center
+	}
+	.select-other-shop {
+		position: fixed;
+		bottom: 160rpx;
+		right: 40rpx;
+		width: 70rpx;
+		height: 70rpx;
+		line-height: 70rpx;
+		text-align: center;
+		background-color: rgba(0, 0, 0, .1);
+		color: #333;
+		z-index: 4;
+		border-radius: 50%;
+		font-size: 22rpx;
 	}
 }
 </style>
